@@ -1,0 +1,294 @@
+.input-group-append {
+	cursor: pointer;
+}
+
+body {
+	font-family: sans-serif;
+	/*background-color: #90ee900f;*/
+	background-color: #f4f7fa;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto
+		auto auto;
+}
+
+.header {
+	grid-column: 1/span 12;
+}
+
+.box {
+	font-family: sans-serif;
+	box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.2);
+	transition: box-shadow 0.2s;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.box:hover {
+	box-shadow: 0 8px 16px 7px rgba(0, 0, 0, 0.2);
+}
+
+#total {
+	position: absolute;
+	top: 100px;
+	left: 550px;
+	width: 400px;
+	padding: 20px 10px;
+}
+
+#family {
+	position: absolute;
+	left: 150px;
+	top: 300px;
+	padding: 10px 4px;
+	margin-top: 10px;
+	width: 300px;
+	margin-left: 200px;
+}
+
+#personal {
+	position: absolute;
+	right: 400px;
+	top: 300px;
+	padding: 10px 4px;
+	margin-top: 10px;
+	width: 300px;
+	margin-left: 200px;
+}
+
+.box p {
+	color: rgb(142, 149, 156);
+}
+
+.box button {
+	width: 80px;
+	border: 1px solid #555;
+	border-radius: 4px;
+	padding: 4px 0;
+	transition: background-color 0.2s;
+	margin-right: 10px;
+}
+
+.box button.add {
+	float: left;
+	margin-left: 30px;
+}
+
+.box button.view {
+	float: right;
+	margin-right: 30px;
+}
+
+.box button:hover {
+	background-color: #555;
+	color: white;
+	cursor: pointer;
+}
+
+.my-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background-color: black;
+	background-color: rgba(0, 0, 0, 0.74);
+	display: none;
+	transition: display 4s;
+}
+
+.my-modal-content {
+	background-color: #fefefe;
+	margin: 5% auto;
+	width: 1171px;
+	height: 180px;
+	border: 1px solid #888;
+}
+
+.close-icon {
+	font-size: 30px;
+	font-weight: bold;
+	color: #aaa;
+	float: right;
+	margin-right: 12px
+}
+
+.close-icon:hover {
+	cursor: pointer;
+	color: #000;
+}
+
+.modal-content-header {
+	margin-top: 25px;
+	font-size: 25px;
+	text-align: center;
+	font-weight: 600;
+}
+
+form {
+	margin-top: 20px;
+}
+
+label {
+	font-weight: 600;
+}
+
+table {
+	margin-left: 80px;
+}
+
+td {
+	padding: 10px 0;
+	padding-right: 30px;
+}
+
+.my-modal button {
+	padding: 4px 15px;
+	border-radius: 4px;
+	border: 1px solid #555;
+	transition: background-color 0.2s;
+}
+
+.my-modal button:hover {
+	background-color: #555;
+	color: white;
+	cursor: pointer;
+}
+
+#cancel-button {
+	margin-left: 210px;
+	margin-top: 18px;
+}
+
+#submit-button {
+	margin-left: 134px;
+}
+
+#family-expenses, #personal-expenses {
+	display: none;
+	width: 86%;
+	margin: auto;
+}
+
+#current-month-expenses {
+	display: block;
+	width: 86%;
+	margin: auto;
+}
+
+.add-expense-button {
+	padding: 10px;
+	margin: 15px 0;
+	background-color: #12c48b;
+	color: white;
+	font-size: 16px;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 0 2px 4px 0 #04aa6d4a;
+	transition: box-shadow 0.2s;
+}
+
+.add-expense-button:hover {
+	cursor: pointer;
+	box-shadow: 0 4px 6px 0 #04aa6d4a;
+}
+
+.row2 {
+	grid-column: 12/span 1;
+}
+
+.form {
+	grid-column: 1/span 12;
+}
+
+.form-container {
+	display: grid;
+	grid-template-columns: 371px 169px 169px 371px;
+	row-gap: 10px;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.label {
+	display: block;
+	font-family: sans-serif;
+	color: #808080;
+	font-size: 14px;
+}
+
+.text {
+	height: 33px;
+	border: 1px solid #80808066;
+	border-radius: 8px;
+	width: 150px;
+}
+
+.text:hover, .dropdown:hover {
+	border-color: rgba(128, 128, 128, 0.828);
+}
+
+.text:focus, .dropdown:focus {
+	outline: none;
+}
+
+.dropdown {
+	width: 350px;
+	height: 33px;
+	border-radius: 8px;
+	border: 1px solid #80808066;
+}
+
+.form-radio {
+	margin-top: 8px;
+	accent-color: black;
+}
+
+.form-radio-label {
+	font-family: sans-serif;
+	font-size: 15px;
+	color: #04AA6D;
+}
+
+.purchaseDate {
+	grid-column: 1/span 1;
+}
+
+.form-grid-button {
+	grid-column: 4/span 1;
+}
+
+.form-submit-button {
+	padding: 7px;
+	margin: 15px 0;
+	width: 88px;
+	background-color: #12c48b;
+	color: white;
+	font-size: 16px;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 0 2px 4px 0 #04aa6d4a;
+	transition: box-shadow 0.2s;
+}
+
+.form-submit-button:hover {
+	cursor: pointer;
+	box-shadow: 0 4px 6px 0 #04aa6d4a;
+}
+
+#category {
+	width: 200px;
+}
+
+#inputPurchaseDate {
+	width: 153px;
+}
+
+.icon-border {
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 0px;
+	border-top-left-radius: 0px;
+	height: 33px;
+}

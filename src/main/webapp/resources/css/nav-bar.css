@@ -1,0 +1,41 @@
+body {
+	font-family: sans-serif;
+	/*background-color: #90ee900f;*/
+	background-color: #f4f7fa;
+}
+
+.nav-bar {
+	background-color: #12c48b;
+	overflow: hidden;
+}
+
+.logo {
+	float: left;
+	padding: 16px 6px;
+	font-family: sans-serif;
+	color: white;
+}
+
+.nav-item {
+	float: right;
+	font-family: sans-serif;
+	
+}
+
+.nav-item a {
+	display: inline-block;
+	text-decoration: none;
+	padding: 16px 6px;
+	color:  white;
+	transition: text-decoration 2s;
+	transition: background-color 0.2s;
+	
+}
+
+.nav-item a:hover {
+	text-decoration: underline;
+	text-decoration-color: #000000cc;
+	background-color: #9999993d;
+	color: #000000cc;
+	
+}
