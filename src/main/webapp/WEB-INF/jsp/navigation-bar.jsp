@@ -10,7 +10,7 @@
 <body>
 	<div class="nav-bar">
 		<div class="logo">Expense Tracker</div>
-		<div class="nav-item"><a href="addsource">Add Source</a></div>
+		<div class="nav-item"><a href="addsource">Source</a></div>
 		<div class="nav-item"><a href="additem">Add Item</a></div>
 		<div class="nav-item"><a href="viewexpenditure">View Expenses</a></div>
 		<div class="nav-item"><a href="home">Home</a></div>

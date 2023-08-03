@@ -29,4 +29,16 @@ public class SourceServiceImpl implements SourceService {
 
 	}
 
+	@Override
+	public void deleteSource(String sourceId) {
+		sourceDao.delete(sourceId);
+		
+	}
+
+	@Override
+	public void updateSource(Source source) {
+		sourceDao.update(source);
+		
+	}
+
 }

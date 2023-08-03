@@ -28,8 +28,23 @@ public class SourceController {
 		reset(model);
 		return "addSource";
 	}
+	
+	@PostMapping("/updatesource")
+	public String updateSource(@ModelAttribute("source") Source source, Model model) {
+		sourceService.updateSource(source);
+		reset(model);
+		return "addSource";
+	}
 
 	private void reset(Model model) {
+		model.addAttribute("sourceList", sourceService.getSourceList());
 		model.addAttribute("source", new Source());
+	}
+	
+	@PostMapping("/deletesource")
+	public String deleteSource(@ModelAttribute("source") Source source, Model model) {
+		sourceService.deleteSource(source.getSourceId());
+		reset(model);
+		return "addSource";
 	}
 }
