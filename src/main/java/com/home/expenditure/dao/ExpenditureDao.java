@@ -9,4 +9,5 @@ public interface ExpenditureDao {
 	void save(Expenditure expenditure);
 	double getExpenditureTotalAmount(ExpenditureSearchCommand expenditureSearchCommand);
 	List<Expenditure> getExpenditureList(ExpenditureSearchCommand expenditureSearchCommand);
+	void update(Expenditure expenditure);
 }

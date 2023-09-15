@@ -18,8 +18,11 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/add-source.css" />" />
-
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/custom-modal.css" />" />	
+<script src="<c:url value="/resources/js/custom-modal.js"/>" defer></script>
 <script src="<c:url value="/resources/js/source.js" />" defer></script>
+
 </head>
 <body>
 	<div class="grid-container">

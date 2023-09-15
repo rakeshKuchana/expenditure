@@ -36,8 +36,10 @@ public class ExpenditureDaoImpl implements ExpenditureDao {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate date = LocalDate.parse(expenditure.getPurchaseDate(), formatter);
 
-		jdbcTemplate.update(sql, new Object[] { UUID.randomUUID().toString(), expenditure.getItem().getItemId(),
-				expenditure.getQuantity(), expenditure.getAmount(), expenditure.getCategory().getCategoryId(), date, expenditure.getSource().getSourceId() });
+		jdbcTemplate.update(sql,
+				new Object[] { UUID.randomUUID().toString(), expenditure.getItem().getItemId(),
+						expenditure.getQuantity(), expenditure.getAmount(), expenditure.getCategory().getCategoryId(),
+						date, expenditure.getSource().getSourceId() });
 
 	}
 
@@ -74,11 +76,15 @@ public class ExpenditureDaoImpl implements ExpenditureDao {
 		//@formatter:off
 		sql.append(" SELECT ")
 		   .append("     i.item_name, ")
+		   .append("     i.item_id, ")
 		   .append("     e.quantity, ")
 		   .append("     e.amount, ")
 		   .append("     to_char(e.purchase_date, 'DD-Mon-YYYY') purchase_date,")
 		   .append("     s.source_name, ")
-		   .append("     c.category_name ")
+		   .append("     s.source_id, ")
+		   .append("     c.category_name, ")
+		   .append("     c.category_id, ")
+		   .append("     e.expenditure_id ")
 		   .append(" FROM ")
 		   .append("     expenditure e, ")
 		   .append("     category    c, ")
@@ -111,15 +117,20 @@ public class ExpenditureDaoImpl implements ExpenditureDao {
 				Expenditure expenditure = new Expenditure();
 				Item item = new Item();
 				item.setItemName(rs.getString("ITEM_NAME"));
+				item.setItemId(rs.getString("ITEM_ID"));
 				expenditure.setItem(item);
 				expenditure.setQuantity(rs.getDouble("QUANTITY"));
 				expenditure.setAmount(rs.getDouble("AMOUNT"));
 				expenditure.setPurchaseDate(rs.getString("PURCHASE_DATE"));
-				expenditure.setSource(new Source());
-				expenditure.getSource().setSourceName(rs.getString("SOURCE_NAME"));
+				Source source = new Source();
+				source.setSourceId(rs.getString("SOURCE_ID"));
+				source.setSourceName(rs.getString("SOURCE_NAME"));
+				expenditure.setSource(source);
 				Category category = new Category();
 				category.setCategoryName(rs.getString("CATEGORY_NAME"));
+				category.setCategoryId(rs.getString("CATEGORY_ID"));
 				expenditure.setCategory(category);
+				expenditure.setExpenditureId(rs.getString("EXPENDITURE_ID"));
 
 				return expenditure;
 			}
@@ -127,6 +138,32 @@ public class ExpenditureDaoImpl implements ExpenditureDao {
 		});
 
 		return list;
+	}
+
+	@Override
+	public void update(Expenditure expenditure) {
+		
+		System.out.println(expenditure.getPurchaseDate());
+		
+		StringBuilder sql = new StringBuilder();
+		//@formatter:off
+		sql.append(" UPDATE expenditure ")
+		   .append(" SET ")
+		   .append("     item_id = ?, ")
+		   .append("     quantity = ?, ")
+		   .append("     amount = ?, ")
+		   .append("     category_id = ?, ")
+		   .append("     purchase_date = to_date(?, 'mm/dd/yyyy'), ")
+		   .append("     source_id = ? ")
+		   .append(" WHERE ")
+		   .append("     expenditure_id = ? ");
+		 //@formatter:on
+		  
+		   Object[] params = {expenditure.getItem().getItemId(), expenditure.getQuantity(), expenditure.getAmount(),
+				   expenditure.getCategory().getCategoryId(), expenditure.getPurchaseDate(), expenditure.getSource().getSourceId(), expenditure.getExpenditureId()};
+		   
+	   jdbcTemplate.update(sql.toString(), params);
+		
 	}
 
 }

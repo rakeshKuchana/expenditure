@@ -39,9 +39,24 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List<Item> getItemList() {
 
-		String sql = "select * from item order by item_name";
+		StringBuilder sql = new StringBuilder();
+		//@formatter:off
+		sql.append(" SELECT ")
+		   .append("     i.item_id, ")
+		   .append("     i.item_name, ")
+		   .append("     c.category_id, ")
+		   .append("     c.category_name ")
+		   .append(" FROM ")
+		   .append("     item     i, ")
+		   .append("     category c ")
+		   .append(" WHERE ")
+		   .append("         i.category_id = c.category_id ")
+		   .append("     AND c.category_type = 'Item' ")
+		   .append(" ORDER BY ")
+		   .append("     i.item_name ");
+		 //@formatter:on
 
-		List<Item> list = jdbcTemplate.query(sql, new RowMapper<Item>() {
+		List<Item> list = jdbcTemplate.query(sql.toString(), new RowMapper<Item>() {
 
 			@Override
 			public Item mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -51,12 +66,32 @@ public class ItemDaoImpl implements ItemDao {
 				item.setItemName(rs.getString("ITEM_NAME"));
 				Category category = new Category();
 				category.setCategoryId(rs.getString("CATEGORY_ID"));
+				category.setCategoryName(rs.getString("CATEGORY_NAME"));
 				item.setCategory(category);
 				return item;
 			}
 
 		});
 		return list;
+	}
+
+	@Override
+	public void delete(String itemId) {
+
+		String sql = "delete from item where item_id = ?";
+
+		jdbcTemplate.update(sql, new Object[] { itemId });
+
+	}
+
+	@Override
+	public void update(Item item) {
+
+		String sql = "update item set item_name = ?, category_id = ? where item_id = ?";
+
+		jdbcTemplate.update(sql,
+				new Object[] { item.getItemName(), item.getCategory().getCategoryId(), item.getItemId() });
+
 	}
 
 }

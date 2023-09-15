@@ -19,9 +19,9 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
-
-<link rel="stylesheet" href="<c:url value="/resources/css/home.css" />" />
 <script src="<c:url value="/resources/js/home.js" />" defer></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/home.css" />" />
+
 
 </head>
 <body>
@@ -33,7 +33,8 @@
 
 		<!-- row 2 -->
 		<div class="row2">
-			<button onclick="openAddExpenseModal()" class="add-expense-button">Add Expense</button>
+			<button onclick="openAddExpenseModal()" class="add-expense-button">Add
+				Expense</button>
 		</div>
 	</div>
 
@@ -77,8 +78,9 @@
 
 						<div>
 							<label for="item" class="label">Item</label>
-							<form:select path="item.itemId" id="item" class="dropdown" required="required">
-								<form:option value="">Select item...</form:option>
+							<form:select path="item.itemId" id="item" class="dropdown"
+								required="required">
+								<form:option value="" id="default-item">Select item...</form:option>
 								<c:forEach var="item" items="${itemList}">
 									<form:option value="${item.itemId}">${item.itemName}</form:option>
 								</c:forEach>
@@ -87,17 +89,18 @@
 
 						<div>
 							<label for="quantity" class="label">Quantity</label>
-							<form:input type="text" path="quantity" class="text"
-								id="quantity"/>
+							<form:input type="text" path="quantity" class="text modal-quantity"
+								id="quantity" />
 						</div>
 						<div>
 							<label for="amount" class="label">Amount</label>
-							<form:input type="text" path="amount" class="text" id="amount"/>
+							<form:input type="text" path="amount" class="text modal-amount" id="amount" />
 						</div>
 						<div>
 							<label for="source" class="label">Source</label>
-							<form:select path="source.sourceId" id="source" class="dropdown" required="required">
-								<form:option value="">Select source...</form:option>
+							<form:select path="source.sourceId" id="source" class="dropdown"
+								required="required">
+								<form:option value="" id="default-source">Select source...</form:option>
 								<c:forEach var="source" items="${sourceList}">
 									<form:option value="${source.sourceId}">${source.sourceName}</form:option>
 								</c:forEach>
@@ -108,7 +111,7 @@
 							<label for="inputPurchaseDate" class="label">Purchase
 								date</label>
 							<div class="input-group date" id="datepicker">
-								<form:input type="text" path="purchaseDate" class="dropdown"
+								<form:input type="text" path="purchaseDate" class="dropdown modal-purchaseDate"
 									id="inputPurchaseDate" />
 								<span class="input-group-append"> <span
 									class="input-group-text bg-light icon-border"> <i
@@ -132,6 +135,7 @@
 							<label for="category2" class="form-radio-label">Personal</label>
 
 						</div>
+						<form:input type="hidden" path="expenditureId" id="modalInputExpenditureId" />
 
 						<div class="form-grid-button">
 							<button type="submit" class="form-submit-button">Add</button>
@@ -235,7 +239,7 @@
 		</c:if>
 
 	</div>
-	
+
 	<div style="margin-top: 500px" id="current-month-expenses">
 		<c:if test="${not empty currentMonthExpenditureList}">
 
@@ -251,19 +255,24 @@
 							<th>Purchase Date</th>
 							<th>Source</th>
 							<th>Expense Type</th>
+							<th>Edit</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="expenditure"
 							items="${currentMonthExpenditureList}">
-								<tr>
-									<td>${expenditure.item.itemName}</td>
-									<td>${expenditure.quantity}</td>
-									<td>${expenditure.amount}</td>
-									<td>${expenditure.purchaseDate}</td>
-									<td>${expenditure.source.sourceName}</td>
-									<td>${expenditure.category.categoryName}</td>
-								</tr>
+							<tr>
+								<td>${expenditure.item.itemName}</td>
+								<td>${expenditure.quantity}</td>
+								<td>${expenditure.amount}</td>
+								<td>${expenditure.purchaseDate}</td>
+								<td>${expenditure.source.sourceName}</td>
+								<td>${expenditure.category.categoryName}</td>
+								<td><button onclick="editExpense('${expenditure.expenditureId}','${expenditure.item.itemName}','${expenditure.item.itemId}','${expenditure.quantity}','${expenditure.amount}','${expenditure.purchaseDate}','${expenditure.source.sourceName}','${expenditure.source.sourceId}','${expenditure.category.categoryName}')"
+										style="border: none; background: none">
+										<span class="fa fa-pencil"></span>
+									</button></td>
+							</tr>
 						</c:forEach>
 
 					</tbody>
@@ -277,14 +286,14 @@
 	</div>
 
 
-<script type="text/javascript"
+	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-		
-		<script type="text/javascript"
+
+	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 	<script>
 		$(document).ready(function() {

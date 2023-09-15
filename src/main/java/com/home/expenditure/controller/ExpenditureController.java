@@ -131,6 +131,38 @@ public class ExpenditureController {
 		model.addAttribute("expenditure", exp);
 		return "home";
 	}
+	
+	
+	@PostMapping("/updateexpenditure")
+	public String updateExpenditure(@ModelAttribute("expenditure") Expenditure expenditure, Model model) {
+
+		expenditureService.updateExpenditure(expenditure);
+		List<Expenditure> currentMonthExpenditureList = expenditureService.getExpenditureListForCurrentMonth();
+
+		double currentMonthTotalExpense = ExpenseCalculator.getTotalAmount(currentMonthExpenditureList, null);
+
+		double currentMonthFamilyExpense = ExpenseCalculator.getTotalAmount(currentMonthExpenditureList, "Family");
+
+		double currentMonthPersonalExpense = ExpenseCalculator.getTotalAmount(currentMonthExpenditureList, "Personal");
+
+		DecimalFormat df = new DecimalFormat("#,##,###.00");
+		String currentMonthTotalExpenseInRupees = df.format(currentMonthTotalExpense);
+		String currentMonthFamilyExpenseInRupees = df.format(currentMonthFamilyExpense);
+		String currentMonthPersonalExpenseInRupees = df.format(currentMonthPersonalExpense);
+
+		model.addAttribute("currentMonthExpenditureList", currentMonthExpenditureList);
+		model.addAttribute("currentMonthTotalExpenseInRupees", currentMonthTotalExpenseInRupees);
+		model.addAttribute("currentMonthFamilyExpenseInRupees", currentMonthFamilyExpenseInRupees);
+		model.addAttribute("currentMonthPersonalExpenseInRupees", currentMonthPersonalExpenseInRupees);
+
+		model.addAttribute("sourceList", sourceService.getSourceList());
+		model.addAttribute("itemList", itemService.getItemList());
+
+		Expenditure exp = new Expenditure();
+		exp.setPurchaseDate(DateUtil.getCurrentDateString("MM/dd/yyyy"));
+		model.addAttribute("expenditure", exp);
+		return "home";
+	}
 
 	@GetMapping("/viewexpenditure")
 	public String viewExpenditure(Model model) {

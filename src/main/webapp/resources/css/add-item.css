@@ -72,3 +72,9 @@ body {
 	cursor: pointer;
 	box-shadow: 0 4px 6px 0 #04aa6d4a;
 }
+
+.datatable-container {
+	grid-column: 4 / span 5;
+	margin-top: 60px;
+	color: #3C4043;
+}

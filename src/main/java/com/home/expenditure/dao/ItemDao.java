@@ -7,5 +7,7 @@ import com.home.expenditure.domain.Item;
 public interface ItemDao {
 	void save(Item item);
 	List<Item> getItemList();
+	void delete(String itemId);
+	void update(Item item);
 
 }

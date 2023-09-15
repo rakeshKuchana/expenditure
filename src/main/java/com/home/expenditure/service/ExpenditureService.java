@@ -10,4 +10,5 @@ public interface ExpenditureService {
 	void addExpenditure(Expenditure expenditure);
 	List<Expenditure> getExpenditureList(ExpenditureSearchCommand expenditureSearchCommand);
 	List<Expenditure> getExpenditureListForCurrentMonth();
+	void updateExpenditure(Expenditure expenditure);
 }

@@ -43,4 +43,10 @@ public class ExpenditureServiceImpl implements ExpenditureService {
 		return expenditureDao.getExpenditureList(expenditureSearchCommand);
 	}
 
+	@Override
+	public void updateExpenditure(Expenditure expenditure) {
+		expenditureDao.update(expenditure);
+		
+	}
+
 }
